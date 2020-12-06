@@ -5,6 +5,8 @@ import Register from '../components/Register.vue'
 import Seller from '../views/Seller.vue'
 import HomeForSeller from '../views/HomeForSellers.vue'
 import ProductSeller from '../components/ProductSeller.vue'
+import HomeForBuyers from '../views/HomeForBuyers.vue'
+import Stripe from '../components/Stripe.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -45,6 +47,18 @@ const routes = [
 		name:'ProductSeller',
 		component:ProductSeller,
 		props:true
+	},
+	{
+		path:'/home-buyer',
+		name:"HomeBuyers",
+		component:HomeForBuyers,
+		props:true
+	},
+	{
+		path:'/stripe',
+		name:"Stripe",
+		component:Stripe,
+		props: true
 	}
 	
 

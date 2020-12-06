@@ -107,7 +107,8 @@ methods:{
 					}).catch(err => console.log(err))
 					},
 					getProducts(){
-						axios.get(`${environment['dev']._url}/products`).then(response=>{
+						const id = localStorage.getItem('id')
+						axios.get(`${environment['dev']._url}/coffee-seller/products/${id}`).then(response=>{
 						this.products = response.data.productos
 								})
 					}
