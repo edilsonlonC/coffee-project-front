@@ -1,5 +1,6 @@
 <template>
-<div><div class="nav-product-seller">
+<div>
+<div class="nav-product-seller">
 	<a href="#" v-b-toggle.sidebar-no-header> <i class="fa fa-sliders-h"></i> </a>
 	<router-link to='/home-seller/products'> Productos</router-link>
 	<a href="#"> <span> <i class="fas fa fa-cog"></i></span></a>

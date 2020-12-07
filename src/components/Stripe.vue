@@ -80,5 +80,7 @@ sendServer: function(charge){
 </script>
 
 <style>
-
+div img{
+border-radius:99%;
+}
 </style>

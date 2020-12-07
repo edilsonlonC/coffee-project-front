@@ -1,6 +1,28 @@
 <template>
 <div id="home-buyers">
-<SearchProducts/>
+<b-modal ref="stripe-modal">
+<Stripe :amount="price" :name="name"  :url_image="url_image"></Stripe>
+</b-modal>
+<div class="container">
+
+<b-form >
+
+	<b-form-group
+	label="Bucar"
+	label-for='search'
+	>
+	<b-form-input 
+	id="search"
+	type="text"
+	v-model = 'query'
+	>
+
+	</b-form-input>
+
+	</b-form-group>
+</b-form>
+
+</div>
 <div class="products">
 <div>
 <div class="container">
@@ -15,8 +37,8 @@
 					<span> <i class = "fa fa-info-square"></i> <strong>{{ product.description }}</strong></span><br>
 					<span> <i class="fa fa-building"></i> Vendedor: {{ product.Seller.name }}</span><br>
 					<span> <i class="fa fa-dollar-sign"></i> Precio : {{ product.price }}</span>
-				</div>	
-				<b-button @click="payMethod(product.price,product.name,product)"> <span> <li class="fa fa-shopping-cart"></li></span></b-button>
+				</div>
+				<b-button  class="shop-button" @click="payMethod2(product.price,product.name)"> <span> <li class="fa fa-shopping-cart"></li></span></b-button>
 
 
 
@@ -31,25 +53,40 @@
 	
 </div>
 </div>
+
 	
 </template>
 
 <script>
-import SearchProducts from '../components/SearchProducts'
 import environment from '../environment/base'
 import axios from 'axios'
+import Stripe from '../components/Stripe'
 
 export default {
 name:"HomeforBuyers",
 components:{
-			SearchProducts
+Stripe
 			},
 	data(){
 		return {
-			products:[]
+			products:[],
+			query:'',
+			price:null,
+			name:null,
+			url_image:null,
+			stripe_show: false
 
 		}
 },
+watch:{
+query:async function(value){
+			const base = environment['dev']
+			const result = await axios.get(`${ base._url }/products/seller?search=${ value }`)	
+			this.products = result.data.productos
+
+				}
+
+			},
 	mounted(){
 	const base = environment['dev']
 		axios.get(`${base._url}/products/seller`).then(response => {
@@ -67,18 +104,39 @@ methods:{
 					const Sellerid = localStorage.getItem('id')
 					console.log(Sellerid)
 					this.$router.push(
-					{
+					{ 
 					name:'Stripe'
 					,params:{
 					amount:price,name,url_image:'https://placekitten.com/300/300',
 					product
-					}
+					} 
 					})
+					}, 
+					searchProducts(evt){
+					evt.preventDefault()
+					console.log(this.query)
+
+					},
+					getProducts(){
+					console.log('In getProducts')
+					},
+payMethod2(price,name){
+		console.log('pay method 2')
+		this.name = name
+		this.price = price
+		this.stripe_show= true
+		this.url_image = 'https://placekitten.com/300/300'
+		this.$refs['stripe-modal'].show()
 					}
-				}
+				},
+emits:["get:products"]
 }
 </script>
 
 <style>
+.shop-button{
 
+background-color: #000;
+
+}
 </style>
