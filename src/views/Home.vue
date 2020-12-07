@@ -73,7 +73,7 @@
 							</b-button>
 						</div>
 						<div class="col">
-							<b-button href='#' >
+							<b-button href='#' @click="showLoginBuyerMethod">
 									Ingresar
 							</b-button>
 						</div>
@@ -92,6 +92,11 @@
 				<RegisterBuyer/>
 			</b-card>
 		</div>
+		<div v-if="showLoginBuyer">
+			<b-card>
+				<LoginBuyer/>
+			</b-card>
+		</div>
 		</div>
 
 	</div>
@@ -104,37 +109,49 @@
 import Register from '../components/Register'
 import LoginSeller from '../components/LoginSeller'
 import RegisterBuyer from '../components/RegisterBuyer.vue'
+import LoginBuyer from '../components/LoginBuyer'
 export default {
   name: 'Home',
 					data(){
 						return{
 						showRegisterSeller:false,
 						showLoginSeller:false,
-						showRegisterBuyer:false
+						showRegisterBuyer:false,
+						showLoginBuyer:false
 						}
 					},
   components: {
 	Register,
 	LoginSeller,
-	RegisterBuyer
+	RegisterBuyer,
+	LoginBuyer
   },
 methods:{
 showRegisterSellerMethod :function () {
 				this.showRegisterSeller = !this.showRegisterSeller
 				this.showLoginSeller = false
 				this.showRegisterBuyer =false
+				this.showLoginBuyer = false
 													},
 				
 showLoginSellerMethod: function(){
 				this.showLoginSeller = !this.showLoginSeller
 				this.showRegisterSeller = false
 				this.showRegisterBuyer = false
+				this.showLoginBuyer = false
 											},
 showRegisterBuyerMethod: function(){
 				this.showRegisterBuyer = !this.showRegisterBuyer
 				this.showLoginSeller = false
 				this.showRegisterSeller =false
-												}
+				this.showLoginBuyer = false
+												},
+showLoginBuyerMethod: function(){
+				this.showLoginBuyer = !this.showLoginBuyer
+				this.showRegisterBuyer = false
+				this.showLoginSeller = false
+				this.showRegisterSeller =false
+							}
 											
 }
 }

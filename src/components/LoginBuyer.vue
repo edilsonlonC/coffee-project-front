@@ -1,6 +1,6 @@
 <template>
 	<div>
-	<h1> Login vendedores </h1>
+	<h1> Login Compradores </h1>
 		<b-form @submit="onSubmit"  v-if="show">
 			<b-form-group 
 				id="input-group-1"
@@ -43,7 +43,7 @@ import environment from '../environment/base'
 import axios from 'axios'
 
 export default {
-	name:"LoginSeller",
+	name:"LoginBuyer",
 		data(){
 		return{
 		form:{
@@ -58,13 +58,13 @@ methods:{
 					onSubmit(evt){
 					evt.preventDefault()
 					const base = environment['dev']
-					axios.post(`${base._url}/coffee-seller/login/`,this.form)
+					axios.post(`${base._url}/buyer/login/`,this.form)
 					.then( response =>{
-							const { token} = response.data
-							const seller = response.data.vendedor
+							const { token } = response.data
+							const buyer = response.data.comprador
 							if (token){
-							localStorage.setItem('id',seller.id)	
-							this.$router.push({ path:"home-seller" })
+							localStorage.setItem('id',buyer.id)	
+							this.$router.push({ path:"home-buyer" })
 							} 
 							else return console.log('No authorized')
 

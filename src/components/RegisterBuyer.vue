@@ -81,7 +81,10 @@ methods:{
 						evt.preventDefault()
 						const base = environment['dev']
 						axios.post(`${base._url}/buyer`,this.form).then(response =>{
-									console.log(response)
+									const {id} = response.data.comprador
+									localStorage.setItem('id', id)
+
+									this.$router.push({path:'home-buyer'})
 								})
 					}
 				}

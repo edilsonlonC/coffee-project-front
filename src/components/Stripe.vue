@@ -25,7 +25,13 @@ import axios from 'axios'
 import environment from '../environment/base'
 
 export default{
-props:["amount","product",'name', "url_image"],
+			props:{
+			amount:Number,
+			product:Object,
+			name:String,
+			url_image:String,
+			SellerId:Number
+			},
 components:{
 	StripeElements
 					},
@@ -53,7 +59,16 @@ this.token = token
 							},
 sendServer: function(charge){
 	const base = environment['dev']
-	axios.post(`${base._url}/pay/stripe`, charge)
+		const id  = localStorage.getItem('id')
+		console.log(id)
+		const data = {
+		charge,
+		order : {
+		BuyerId:id,
+		ProductId:this.product.id,
+		}
+		}
+	axios.post(`${base._url}/pay/stripe`, data)
 	.then(response => console.log('response server', response))
 	.catch(err => console.log(err))
 		

@@ -16,7 +16,7 @@
 					<span> <i class="fa fa-building"></i> Vendedor: {{ product.Seller.name }}</span><br>
 					<span> <i class="fa fa-dollar-sign"></i> Precio : {{ product.price }}</span>
 				</div>	
-				<b-button @click="payMethod(product.price,product.name)"> <span> <li class="fa fa-shopping-cart"></li></span></b-button>
+				<b-button @click="payMethod(product.price,product.name,product)"> <span> <li class="fa fa-shopping-cart"></li></span></b-button>
 
 
 
@@ -62,14 +62,16 @@ components:{
 	
 	},
 methods:{
-					payMethod(price,name){
+					payMethod(price,name,product){
 					console.log('price', price)
-
+					const Sellerid = localStorage.getItem('id')
+					console.log(Sellerid)
 					this.$router.push(
 					{
 					name:'Stripe'
 					,params:{
-					amount:price,name,url_image:'https://placekitten.com/300/300' 
+					amount:price,name,url_image:'https://placekitten.com/300/300',
+					product
 					}
 					})
 					}

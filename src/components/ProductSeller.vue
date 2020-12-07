@@ -70,6 +70,9 @@ export default {
 	name:'ProductSeller',
 	components:{
 				},
+	mounted(){
+		this.getProducts()
+	},
 	data(){
 		return {
 				fields: ['name', 'description', 'price'],
@@ -108,7 +111,7 @@ methods:{
 					},
 					getProducts(){
 						const id = localStorage.getItem('id')
-						axios.get(`${environment['dev']._url}/coffee-seller/products/${id}`).then(response=>{
+						axios.get(`${environment['dev']._url}/coffee-seller/product/${id}`).then(response=>{
 						this.products = response.data.productos
 								})
 					}
