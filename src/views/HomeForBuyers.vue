@@ -1,15 +1,37 @@
 <template>
 <div id="home-buyers">
-<b-modal ref="stripe-modal">
-<Stripe :amount="price" :name="name"  :url_image="url_image"></Stripe>
+<div class="nav-product-seller">
+	<a href="#" class="menu-icon" v-b-toggle.sidebar-no-header> <i class="fa fa-sliders-h"></i> </a>
+	<a href="#" class="logo-item"  v-b-toggle.sidebar-no-header> <span><i class="fas fa-mug-hot"></i>Tecnura</span> </a>
+</div>
+<div>
+    <b-sidebar   id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow>
+      <template #default="{ hide }">
+        <div class="p-3 slide-seller">
+          
+          <nav class="mb-3">
+            <b-nav vertical>
+              <b-nav-item  @click="CloseSesion">Cerrar Sesión</b-nav-item>
+            </b-nav>
+          </nav>
+          <b-button variant="primary button-nav" block @click="hide">Cerrar</b-button>
+        </div>
+      </template>
+    </b-sidebar>
+  </div>
+
+
+<b-modal ref="stripe-modal" :hide-footer="true">
+<Stripe :amount="price" :name="name"  :url_image="url_image"
+:product="product_pay"
+
+></Stripe>
 </b-modal>
 <div class="container">
 
-<b-form >
+<b-form class="search-products">
 
 	<b-form-group
-	label="Bucar"
-	label-for='search'
 	>
 	<b-form-input 
 	id="search"
@@ -26,9 +48,11 @@
 <div class="products">
 <div>
 <div class="container">
-<h4> Products</h4>
 <div v-for="product in products " :key="product.id">
-	<b-card img-src="https://placekitten.com/300/300" img-alt="Product image" img-left class="mb-3">
+	<b-card 
+	:img-src="product.img ? 'http://localhost:3000/uploads/' + product.img : 'http://localhost:3000/uploads/default.png'" 
+	img-alt="Product image" 
+	img-left class="mb-3 card-buyer-product">
 		
 		<b-card-text>
 				<h2>{{ product.name }}</h2>
@@ -38,7 +62,7 @@
 					<span> <i class="fa fa-building"></i> Vendedor: {{ product.Seller.name }}</span><br>
 					<span> <i class="fa fa-dollar-sign"></i> Precio : {{ product.price }}</span>
 				</div>
-				<b-button  class="shop-button" @click="payMethod2(product.price,product.name)"> <span> <li class="fa fa-shopping-cart"></li></span></b-button>
+				<b-button  class="shop-button" @click="payMethod2(product.price,product.name,product)"> <span> <li class="fa fa-shopping-cart"></li></span></b-button>
 
 
 
@@ -74,7 +98,8 @@ Stripe
 			price:null,
 			name:null,
 			url_image:null,
-			stripe_show: false
+			stripe_show: false,
+			product_pay:null
 
 		}
 },
@@ -120,14 +145,20 @@ methods:{
 					getProducts(){
 					console.log('In getProducts')
 					},
-payMethod2(price,name){
-		console.log('pay method 2')
+payMethod2(price,name,product){
 		this.name = name
 		this.price = price
 		this.stripe_show= true
-		this.url_image = 'https://placekitten.com/300/300'
+		this.url_image = product.img ? 'http://localhost:3000/uploads/' + product.img : 'http://localhost:3000/uploads/default.png'
+		console.log('url',this.url_image)
+		this.product_pay = product
 		this.$refs['stripe-modal'].show()
-					}
+					},
+CloseSesion(){
+localStorage.removeItem('id')
+localStorage.removeItem('token')
+this.$router.push({path: "/"})
+}
 				},
 emits:["get:products"]
 }
@@ -138,5 +169,12 @@ emits:["get:products"]
 
 background-color: #000;
 
+}
+.card-buyer-product img{
+width:300px;
+
+}
+.search-products{
+margin-top:25px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div id="register">
-		<h1> Registro vendedores </h1>
+		<h1> Registro </h1>
 		<b-form @submit="onSubmit"  v-if="show">
 			<b-form-group 
 				id="input-group-1"

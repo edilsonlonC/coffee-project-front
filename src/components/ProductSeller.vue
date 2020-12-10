@@ -2,29 +2,28 @@
 
 <div id="productSeller">
 <div class = "nav1"> 
-<a href="#" @click="showModal">Crear Productos</a>
 </div>
+
 <div class="container">
+
 <b-modal ref="modal-upload-image" :hide-footer="true">
-<b-form>
-<b-form-group
-label="imagen"
-label-for='image'
->
+	<b-form>
+		<b-form-group
+		label="imagen"
+		label-for='image'
+		>
 <b-form-file
 v-model="file"
 placeholder="Seleccionar el archivo"
-
-
 >
-</b-form-file>
-</b-form-group>
-<b-button @click="uploadImage">Upload</b-button>
+	</b-form-file>
+	</b-form-group>
+	<b-button @click="uploadImage">Subir</b-button>
 </b-form>
 
 
 </b-modal>
-<b-modal ref="modal-update" :hide-footer="true">
+<b-modal ref="modal-update" :hide-footer="true" title="Actualizar">
 
 <b-form>
 
@@ -42,7 +41,7 @@ v-model="form.name"
 </b-form-group>
 
 <b-form-group
-label="Descripci?n"
+label="Descripción"
 label-for="description"
 >
 <b-form-input
@@ -76,13 +75,15 @@ v-model="form.price"
 <div class="container">
 
 <!-- form for search query -->
+
 <b-form > 
 
 <b-form-group
-label="Buscar"
-laber-for="search"
+
+class='form-search'
 >
 
+<a href="#" class="btn btn-success btn-create" @click="showModal">  <span> <i class="fa fa-plus"></i> Crear Productos </span> </a>
 <b-form-input
 id="search"
 type="text"
@@ -113,7 +114,7 @@ v-model="query"
 	</b-form-input>
 	</b-form-group>
 	<b-form-group
-	label="Descripci?n"
+	label="Descripción"
 	label-for="description-input"
 	>
 	<b-form-input
@@ -161,7 +162,7 @@ img-left
 <span> <strong>Precio</strong> : {{ product.price }} </span>
 <div class="container container-buttons">
 
-<button class="btn btn-dark" @click="showModalImage(product.id)">upload image</button>
+<button class="btn btn-dark" @click="showModalImage(product.id)">Subir imagen</button>
 <button class="btn btn-danger" @click="deleteProduct(product.id)"> Eliminar </button>
 
 <button 
@@ -332,4 +333,20 @@ padding-top:20px;
 
 margin: 10px;
 }
+
+#productSeller{
+margin-top: 100px;
+}
+
+.form-search{
+	margin:20px;
+
+}
+.btn-create{
+width: 100%;
+margin-bottom:20px;
+}
+
+
+
 </style>

@@ -1,10 +1,15 @@
 <template>
+
 	<div>
-	<h1> Login vendedores </h1>
+	<div class="alert alert-danger" role="alert" v-if="loginError">
+		Email o contraseña incorrecto
+	</div>
+	
+	<h1>  Login </h1>
 		<b-form @submit="onSubmit"  v-if="show">
 			<b-form-group 
 				id="input-group-1"
-				label="email"
+				label="Email"
 				label-for="input-1"
 			>
 			<b-form-input
@@ -41,9 +46,7 @@
 <script>
 import environment from '../environment/base'
 import axios from 'axios'
-
-export default {
-	name:"LoginSeller",
+export default { name:"LoginSeller",
 		data(){
 		return{
 		form:{
@@ -51,7 +54,8 @@ export default {
 			password:''
 
 				},
-		show:true
+		show:true,
+		loginError:false
 					}
 				},
 methods:{
@@ -63,13 +67,16 @@ methods:{
 							const { token} = response.data
 							const seller = response.data.vendedor
 							if (token){
-							localStorage.setItem('id',seller.id)	
+							localStorage.setItem('id',seller.id)
+							localStorage.setItem('token',token)
 							this.$router.push({ path:"home-seller" })
 							} 
 							else return console.log('No authorized')
 
 
-							}).catch(() => console.log('unauthorized'))
+							}).catch(() => {
+							this.loginError = true
+								})
 							
 					}
 				}

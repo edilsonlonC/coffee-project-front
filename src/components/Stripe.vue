@@ -15,7 +15,7 @@ locale="de"
 @loading='loading = $event'
 >
 </stripe-elements>
-<button @click="submit">Pay {{ amount }}</button>
+<button @click="submit">Pagar {{ amount }}</button>
 </div>
 </template>
 
@@ -69,7 +69,10 @@ sendServer: function(charge){
 		}
 		}
 	axios.post(`${base._url}/pay/stripe`, data)
-	.then(response => console.log('response server', response))
+		.then(response => {
+		console.log(response)
+		location.reload()
+				})
 	.catch(err => console.log(err))
 		
 
@@ -82,5 +85,8 @@ sendServer: function(charge){
 <style>
 div img{
 border-radius:99%;
+width: 300px;
+height:300px;
 }
+
 </style>

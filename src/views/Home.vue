@@ -6,27 +6,27 @@
 	<div class="fake"></div>
 	<div class='row'>
 		<div class="col">
-			<div class="container container-card"> 
+			<div class="container container-card container-card-login"> 
 
 
 					<b-card
-						title="Eres vendedor?"
-						img-src="https://picsum.photos/600/300/?image=25"
+						:img-src="url_img_seller"
 						img-alt="vendedor"
-						img-top
+						img-right
 						class='card'
 			
 							>
-				<div class='containder'>
+				<div class="title-login"><h3> Vender </h3> </div>
+				<div class='container'>
 				<div class='row'>
-						<div class="col">
-							<b-button href='#' v-on:click= "showRegisterSellerMethod" >
-									Registro
+						<div class="buttons-login">
+							<b-button href='#' class="button" variant="outline-primary"  v-on:click= "showRegisterSellerMethod" >
+									Registrar
 							</b-button>
 						</div>
-						<div class="col">
-							<b-button href='#' v-on:click="showLoginSellerMethod">
-									Login
+						<div >
+							<b-button href='#' class="button"  variant="outline-primary" v-on:click="showLoginSellerMethod">
+									Ingresar
 							</b-button>
 						</div>
 
@@ -58,22 +58,24 @@
 
 
 		<b-card
-			title="Eres comprador?"
-			img-src="https://picsum.photos/600/300/?image=25"
+			:img-src="url_img_buyer"
 			img-alt="vendedor"
-			img-top
+			img-left
 			class="card"
 			
 		>
+
+<div class="title-login"><h3> Comprar </h3> </div>
 		<div class='container'>
 				<div class='row'>
-						<div class="col">
-							<b-button href='#' @click="showRegisterBuyerMethod">
-									Registro
+
+						<div class="buttons-login" >
+							<b-button variant="outline-primary" class="button" href='#' @click="showRegisterBuyerMethod">
+									Registrar
 							</b-button>
 						</div>
-						<div class="col">
-							<b-button href='#' @click="showLoginBuyerMethod">
+						<div >
+							<b-button variant="outline-primary"  class="button" href='#' @click="showLoginBuyerMethod">
 									Ingresar
 							</b-button>
 						</div>
@@ -117,7 +119,9 @@ export default {
 						showRegisterSeller:false,
 						showLoginSeller:false,
 						showRegisterBuyer:false,
-						showLoginBuyer:false
+						showLoginBuyer:false,
+						url_img_seller: "http://localhost:3000/uploads/loginvendedor.jpeg",
+						url_img_buyer: "http://localhost:3000/uploads/comprador.jpeg"
 						}
 					},
   components: {
@@ -156,28 +160,31 @@ showLoginBuyerMethod: function(){
 }
 }
 </script>
-<style>
+<style lang="css" >
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
 
 .home{
 	display:block;
 	width:100%;
 	height : 200vh;
+	
 }
 
 .nav-home{
 	background:rgba(252,252,255,0.9);
-	height:40px;
+	height:50px;
 	width:100%;
 	margin:0;
 	position:fixed;
 	z-index:1;
 	padding-top:5px;
-	box-shadow: .9px .9px ;
+	box-shadow: .9px .9px #BEBEBE;
 	color:#7c1d1d;
+
 
 }
 .fake{
-	height:70px;
+	height:150px;
 }
 
 .card{
@@ -185,6 +192,7 @@ showLoginBuyerMethod: function(){
 	box-shadow:1px 1px 1px 1px  #000;
 	margin-left:10px;
 	border-radius:90px 80px;
+
 }
 
 .card:hover{
@@ -192,8 +200,36 @@ showLoginBuyerMethod: function(){
 	box-shadow:1px 1px 1px 1px  #7c1d1d;
 }
 
+.button {
+margin-top:8em;
+margin-left:15px;
+border: 1px  solid #7c1d1d !important;
+color:#7c1d1d !important;
 
+}
 
+.button:hover{
+
+border: 1px  solid #7c1d1d !important;
+background-color:#7c1d1d !important;
+color:#ffff !important;
+
+}
+
+.container-card-login img{
+}
+.title-login{
+
+color: #7c1d1d;
+text-align:center;
+font-family: "Nerko One", cursive;
+
+}
+.title-login h3{
+
+font-size:4em;
+
+}
 
 
 </style>

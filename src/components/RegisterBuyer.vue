@@ -1,6 +1,6 @@
 <template>
 <div id="regiter-buyer">
-	<h1> Comprador </h1>
+	<h1> Registro </h1>
 	<b-form @submit="onSubmit">
 
 		<b-form-group
@@ -37,7 +37,7 @@
 	</b-form-group>
 	<b-form-group
 		id="password-group-1"
-		label="Contrasenia"
+		label="Contraseña"
 		label-for="password"
 
 		>
@@ -47,7 +47,7 @@
 		v-model="form.password"
 		type="password"
 		required
-		placeholder="Ingresar la contrasenia"
+		placeholder="Ingresar la contraseña"
 		>
 	</b-form-input>
 	</b-form-group>	

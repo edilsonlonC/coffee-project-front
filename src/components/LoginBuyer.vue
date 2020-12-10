@@ -1,10 +1,13 @@
 <template>
 	<div>
-	<h1> Login Compradores </h1>
+	<div class="alert alert-danger" role="alert" v-if="loginError">
+		Email o contraseña incorrecto
+	</div>
+	<h1> Login </h1>
 		<b-form @submit="onSubmit"  v-if="show">
 			<b-form-group 
 				id="input-group-1"
-				label="email"
+				label="Email"
 				label-for="input-1"
 			>
 			<b-form-input
@@ -51,7 +54,8 @@ export default {
 			password:''
 
 				},
-		show:true
+		show:true,
+		loginError:false
 					}
 				},
 methods:{
@@ -64,12 +68,15 @@ methods:{
 							const buyer = response.data.comprador
 							if (token){
 							localStorage.setItem('id',buyer.id)	
+							localStorage.setItem('token',token)
 							this.$router.push({ path:"home-buyer" })
 							} 
 							else return console.log('No authorized')
 
 
-							}).catch(() => console.log('unauthorized'))
+							}).catch(() => {
+							this.loginError = true
+								})
 							
 					}
 				}
